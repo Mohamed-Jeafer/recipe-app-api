@@ -182,7 +182,7 @@ class PrivateRecipeApiTest(TestCase):
         recipe = sample_recipe(user=self.user)
         recipe.tags.add(sample_tag(user=self.user))
         payload = {
-            'title': 'speghetty carbannara',
+            'title': 'Spaghetti Carbonara',
             'time_minutes':25,
             'price':5.00,
         }
