@@ -166,7 +166,7 @@ class PrivateRecipeApiTest(TestCase):
         new_tag = sample_tag(user=self.user, name='Curry')
         payload = {
             'title': 'Chicken Tikka',
-            'tags' : new_tag.id,
+            'tags': new_tag.id,
         }
         url = detail_url(recipe.id)
         self.client.patch(url, payload)
@@ -183,8 +183,8 @@ class PrivateRecipeApiTest(TestCase):
         recipe.tags.add(sample_tag(user=self.user))
         payload = {
             'title': 'Spaghetti Carbonara',
-            'time_minutes':25,
-            'price':5.00,
+            'time_minutes': 25,
+            'price': 5.00,
         }
         url = detail_url(recipe.id)
         self.client.put(url, payload)
