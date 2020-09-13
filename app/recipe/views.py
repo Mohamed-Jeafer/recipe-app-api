@@ -15,9 +15,22 @@ class BaseRecipeAttrViewSet(viewsets.GenericViewSet,
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
+    def _params_to_ints(self, qs):
+        """Convert a list of string ids to a list of integers"""
+        return [int(stg_id) for stg_id in qs.split(',')]
+
     def get_queryset(self):
         """return objects for the current authenticated user only"""
-        return self.queryset.filter(user=self.request.user).order_by('-name')
+        tags = self.request.query_params.get('tags')
+        ingredients = self.request.query_params.get('ingredients')
+        queryset = self.queryset
+        if tags:
+            tags_id = self._params_to_ints(tags)
+            queryset = queryset.filter(tags__id__in=tags_id)
+        if ingredients:
+            ingredient_ids = self._params_to_ints(ingredients)
+            queryset = queryset.filter(ingredients__id__in=ingredient_ids)
+        return queryset.filter(user=self.request.user).order_by('-name')
 
     def perform_create(self, serializer):
         """Create a new object"""
