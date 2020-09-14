@@ -107,7 +107,7 @@ class PrivateIngredientApiTests(TestCase):
 
     def test_ingredients_assigned_unique(self):
         """Test filtering ingredients by assigned returns unique items"""
-        ingredient = Ingredient.objects.create(user=self.userF, name='Eggs')
+        ingredient = Ingredient.objects.create(user=self.user, name='Eggs')
         Ingredient.objects.create(user=self.user, name='Cheese')
         recipe1 = Recipe.objects.create(
             title='Eggs benedict',
